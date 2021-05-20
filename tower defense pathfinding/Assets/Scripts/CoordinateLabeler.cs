@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[ExecuteInEditMode]
 [ExecuteAlways]
 [RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
@@ -61,7 +62,10 @@ public class CoordinateLabeler : MonoBehaviour
     {
         coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
-        label.text = "(" + (coordinates.x).ToString() + "," + (coordinates.y).ToString() + ")";
+
+
+        //due to some reason this label text was getting multiplied by 40 so I divided it by 40 idk what will happen in the future it may break something so I am writing this bigass comment here
+        label.text = "(" + (coordinates.x / 40).ToString() + "," + (coordinates.y / 40).ToString() + ")";
     }
 
     void UpdateObjectName()
