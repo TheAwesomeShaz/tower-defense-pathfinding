@@ -4,50 +4,76 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-[ExecuteInEditMode]
 [ExecuteAlways]
 [RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField] Color defaultColor = Color.white;
     [SerializeField] Color blockedColor = Color.gray;
-
+    [SerializeField] Color exploredColor = Color.yellow;
+    [SerializeField] Color pathColor = new Color(1f, 0.5f, 0f);
 
     TextMeshPro label;
     Vector2Int coordinates = new Vector2Int();
-    Waypoint waypoint;
+    GridManager gridManager;
 
     void Awake()
     {
+        gridManager = FindObjectOfType<GridManager>();
         label = GetComponent<TextMeshPro>();
         label.enabled = false;
         DisplayCoordinates();
-        waypoint = GetComponentInParent<Waypoint>();
+
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        SetLabelColor();
+        ToggleLabels();
         if (!Application.isPlaying)
         {
             DisplayCoordinates();
             UpdateObjectName();
         }
-        SetLabelColor();
-        ToggleLabels();
+
     }
 
     private void SetLabelColor()
     {
-        if (waypoint.IsPlaceable)
+        if (gridManager == null)
         {
-            label.color = defaultColor;
+            Debug.Log("grid manager was null");
+            return;
+        }
+
+        Node node = gridManager.GetNode(coordinates);
+        Debug.Log(coordinates);
+
+        if (node == null) { Debug.Log("node is null"); return; }
+
+        if (!node.isWalkable)
+        {
+            label.color = blockedColor;
+            Debug.Log("set to blocked color");
+        }
+        else if (node.isPath)
+        {
+            label.color = pathColor;
+            Debug.Log("set to path color");
+        }
+        else if (node.isExplored)
+        {
+            label.color = exploredColor;
+            Debug.Log("set to explored color");
         }
         else
         {
-            label.color = blockedColor;
+            label.color = defaultColor;
+            Debug.Log("set to default color");
         }
+
     }
 
     void ToggleLabels()
@@ -66,6 +92,9 @@ public class CoordinateLabeler : MonoBehaviour
 
         //due to some reason this label text was getting multiplied by 40 so I divided it by 40 idk what will happen in the future it may break something so I am writing this bigass comment here
         label.text = "(" + (coordinates.x / 40).ToString() + "," + (coordinates.y / 40).ToString() + ")";
+
+        coordinates.x /= 40;
+        coordinates.y /= 40;
     }
 
     void UpdateObjectName()
