@@ -27,11 +27,12 @@ public class CoordinateLabeler : MonoBehaviour
 
     }
 
+
     // Update is called once per frame
     void Update()
     {
-        SetLabelColor();
         ToggleLabels();
+        SetLabelColor();
         if (!Application.isPlaying)
         {
             DisplayCoordinates();
@@ -49,29 +50,29 @@ public class CoordinateLabeler : MonoBehaviour
         }
 
         Node node = gridManager.GetNode(coordinates);
-        Debug.Log(coordinates);
 
-        if (node == null) { Debug.Log("node is null"); return; }
+
+        if (node == null) { return; }
 
         if (!node.isWalkable)
         {
             label.color = blockedColor;
-            Debug.Log("set to blocked color");
+            Debug.Log("Set this node to blocked color cuz isWalkable: " + node.isWalkable);
         }
         else if (node.isPath)
         {
             label.color = pathColor;
-            Debug.Log("set to path color");
+
         }
         else if (node.isExplored)
         {
             label.color = exploredColor;
-            Debug.Log("set to explored color");
+
         }
         else
         {
             label.color = defaultColor;
-            Debug.Log("set to default color");
+
         }
 
     }
@@ -86,12 +87,14 @@ public class CoordinateLabeler : MonoBehaviour
 
     void DisplayCoordinates()
     {
-        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
-        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+        if (gridManager == null) { return; }
+
+        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / gridManager.UnityGridSize);
+        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / gridManager.UnityGridSize);
 
 
         //due to some reason this label text was getting multiplied by 40 so I divided it by 40 idk what will happen in the future it may break something so I am writing this bigass comment here
-        label.text = "(" + (coordinates.x / 40).ToString() + "," + (coordinates.y / 40).ToString() + ")";
+        label.text = "(" + (coordinates.x).ToString() + "," + (coordinates.y).ToString() + ")";
 
         coordinates.x /= 40;
         coordinates.y /= 40;

@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  blockedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  blockedColor: {r: 1, g: 0, b: 0, a: 1}
   exploredColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  pathColor: {r: 1, g: 0.40701038, b: 0, a: 1}
+  pathColor: {r: 1, g: 0, b: 0.99330616, a: 1}
 --- !u!23 &2891581141831907876
 MeshRenderer:
   m_ObjectHideFlags: 0
