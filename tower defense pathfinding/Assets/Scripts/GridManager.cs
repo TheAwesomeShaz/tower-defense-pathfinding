@@ -34,9 +34,19 @@ public class GridManager : MonoBehaviour
         if (grid.ContainsKey(coordinates))
         {
             grid[coordinates].isWalkable = false;
-            Debug.Log("Blocked the node");
+            //Debug.Log("Blocked the node");
         }
 
+    }
+
+    public void ResetNodes()
+    {
+        foreach (KeyValuePair<Vector2Int, Node> entry in grid)
+        {
+            entry.Value.connectedTo = null;
+            entry.Value.isExplored = false;
+            entry.Value.isPath = false;
+        }
     }
 
     public Vector2Int GetCoordinatesFromPosition(Vector3 position)

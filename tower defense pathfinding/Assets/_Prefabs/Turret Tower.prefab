@@ -4899,7 +4899,7 @@ GameObject:
   - component: {fileID: 2884278870849994868}
   - component: {fileID: 3080159260904899434}
   m_Layer: 0
-  m_Name: Turret Tower 01
+  m_Name: Turret Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4949,6 +4949,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baaa72079c8749c43a2ea19b166c4176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cost: 75
+  buildDelay: 1
 --- !u!1 &7277077112202773764
 GameObject:
   m_ObjectHideFlags: 0

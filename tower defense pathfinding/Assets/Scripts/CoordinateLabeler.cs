@@ -62,12 +62,14 @@ public class CoordinateLabeler : MonoBehaviour
         else if (node.isPath)
         {
             label.color = pathColor;
+            //Debug.Log("Set this node to path color since this is the path");
+
 
         }
         else if (node.isExplored)
         {
             label.color = exploredColor;
-
+            Debug.Log("Set this node to explored color cuz we have searched through this");
         }
         else
         {
@@ -95,6 +97,7 @@ public class CoordinateLabeler : MonoBehaviour
 
         //due to some reason this label text was getting multiplied by 40 so I divided it by 40 idk what will happen in the future it may break something so I am writing this bigass comment here
         label.text = "(" + (coordinates.x).ToString() + "," + (coordinates.y).ToString() + ")";
+
 
         coordinates.x /= 40;
         coordinates.y /= 40;

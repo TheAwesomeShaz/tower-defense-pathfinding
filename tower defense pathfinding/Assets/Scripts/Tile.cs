@@ -14,11 +14,13 @@ public class Tile : MonoBehaviour
     public bool IsPlaceable { get { return isPlaceable; } }
 
     GridManager gridManager;
+    PathFinder pathFinder;
     Vector2Int coordinates = new Vector2Int();
 
     void Awake()
     {
         gridManager = FindObjectOfType<GridManager>();
+        pathFinder = FindObjectOfType<PathFinder>();
     }
 
     void Start()
@@ -26,11 +28,11 @@ public class Tile : MonoBehaviour
         if (gridManager != null)
         {
             coordinates = gridManager.GetCoordinatesFromPosition(transform.position);
-            Debug.Log("This tile is placeable: " + isPlaceable);
+            //Debug.Log("This tile is placeable: " + isPlaceable);
 
             if (!isPlaceable)
             {
-                Debug.Log("blocked this node cuz it was not placeable");
+                //Debug.Log("blocked this node cuz it was not placeable");
                 gridManager.BlockNode(coordinates);
             }
 
@@ -39,10 +41,17 @@ public class Tile : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (isPlaceable)
+        if (gridManager.GetNode(coordinates).isWalkable && !pathFinder.WillBlockPath(coordinates))
         {
-            bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position);
-            isPlaceable = false;
+            bool isSuccessful = towerPrefab.CreateTower(towerPrefab, transform.position);
+
+            if (isSuccessful)
+            {
+                gridManager.BlockNode(coordinates);
+                pathFinder.NotifyReceivers();
+            }
+
+
         }
     }
 }
