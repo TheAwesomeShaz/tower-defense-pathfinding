@@ -25,7 +25,7 @@
 - So there is practically no need for using github desktop while doing commits
 - 
 - 
-- When you get into a situation like : WHY IS THIS SHET NOT WORKING" said dumbledore calmly.
+- When you get into a situation like : {"WHY IS THIS SHET NOT WORKING?!!" asked dumbledore calmly.}
 - Walk away from the PC, hardcore gaming (or some other work which you have to do) for like 2-5 days
 - Come back totally relaxed and get good sleep everyday ofcourse.
-- Fixing the error will feel so effortless that it will look like it fixed itself
+- Fixing the error will feel so effortless that it will look like it fixed itself.
