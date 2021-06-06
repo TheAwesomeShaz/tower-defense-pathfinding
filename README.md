@@ -23,7 +23,7 @@
 - Using property instead of static public variables everywhere
 - If you commit from command line in VSCode, the editor changes also get comitted to github 
 - So there is practically no need for using github desktop while doing commits
-<br>
+- <br>
 - When you get into a situation like : {"WHY IS THIS SHET NOT WORKING?!!" asked dumbledore calmly.}
 - Walk away from the PC, hardcore gaming (or some other work which you have to do) for like 2-5 days
 - Come back totally relaxed and get good sleep everyday ofcourse.
